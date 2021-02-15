@@ -35,7 +35,7 @@ unsigned long ADS86_readID()
     longbuffer = (uint32_t)(buffer[3] << 24) | (uint32_t)(buffer[2] << 16) | (uint16_t)(buffer[1] << 8) | (uint8_t)buffer[0];
     return longbuffer;
 }
-//см. 46-ую страницу ADS8688 datasheet
+//Г±Г¬. 46-ГіГѕ Г±ГІГ°Г Г­ГЁГ¶Гі ADS8688 datasheet
 
 
 int ADS86_testRead()
@@ -47,9 +47,7 @@ int ADS86_testRead()
     DISABLE_ADS86_CShigh();
     return buffer;
 }
-//резюк на 49 Ом на SDO-0-ADS8681 закороти! (тоже закоротнул, не очень помог)
-//мб ставь еще стягивающий резистор.  Проблема была элементарно в TRISBx != 1. TRISBx = 1 для SDI помог.
-//подключи 0.22 Ом резистор к REFCAP ADS8681 (закоротнул)
+
 unsigned long ADS86_testReadX4()
 {
     unsigned long longbuffer;
@@ -60,7 +58,7 @@ unsigned long ADS86_testReadX4()
     buffer[1] = osm_ReadSPI1dummy(0);
     buffer[2] = osm_ReadSPI1dummy(0);
     buffer[3] = osm_ReadSPI1dummy(0);
-    longbuffer = (uint32_t)(buffer[3] << 24) | (uint32_t)(buffer[2] << 16) | (uint16_t)(buffer[1] << 8) | (uint8_t)buffer[0]; //Вот так вот надо выковыриваться. Хотя в C# тоже так.
+    longbuffer = (uint32_t)(buffer[3] << 24) | (uint32_t)(buffer[2] << 16) | (uint16_t)(buffer[1] << 8) | (uint8_t)buffer[0]; //Г‚Г®ГІ ГІГ ГЄ ГўГ®ГІ Г­Г Г¤Г® ГўГ»ГЄГ®ГўГ»Г°ГЁГўГ ГІГјГ±Гї. Г•Г®ГІГї Гў C# ГІГ®Г¦ГҐ ГІГ ГЄ.
     DISABLE_ADS86_CShigh();
     return longbuffer;
 }

@@ -2,7 +2,7 @@
  * File:   newmainXC16.c
  * Author: Abdulhamidov
  *
- * Created on 30 èþëÿ 2020 ã., 12:40
+ * Created on 30 Ã¨Ã¾Ã«Ã¿ 2020 Ã£., 12:40
  */
 
 
@@ -93,15 +93,13 @@ int main(void)
             asm("nop");
             asm("nop"); break;                
             }
-            case 1: {
-
-            } break;
+            case 1: { } break;
             case 2: {
                 __delay32(10);
-//                LBuffer[0] = ADS86_testReadWithCMD(READ_HWORD, DATAOUT_CTL_REG);
-//                LBuffer[1] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG+1);
-//                LBuffer[2] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG+2);
-//                LBuffer[3] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG);                
+//              LBuffer[0] = ADS86_testReadWithCMD(READ_HWORD, DATAOUT_CTL_REG);
+//              LBuffer[1] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG+1);
+//              LBuffer[2] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG+2);
+//              LBuffer[3] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG);                
                 LBuffer[2] = ADS86_testReadWithCMD(READ_HWORD, SDI_CTL_REG);
                 LBuffer[4] = ADS86_testReadWithCMD(READ_HWORD, RANGE_SEL_REG);
                  __delay32(1000);  //1000us
@@ -111,7 +109,7 @@ int main(void)
                 asm("nop");    
                 __delay32(10);
                 __delay32(1000); 
-				LBuffer[5] = ADS86_testReadWithCMD(0, 0);
+		LBuffer[5] = ADS86_testReadWithCMD(0, 0);
             } break;
             case 3: {
                 __delay32(10);               
@@ -129,9 +127,6 @@ int main(void)
             } break;
             case 5: {
                 ADS86_testReadWithCMD(0b11001000, 0x04);
-                asm("nop");            
-            } break;
-            case 6: {
                 asm("nop");            
             } break;
             default: break;

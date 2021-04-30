@@ -86,52 +86,20 @@ int main(void)
     //InitInterrupts();    
     while(1)
     {
-        switch((PORTA & 0x03) | (PORTB & 0x01))
-        {
-            case 0: {/*DO_testOutput = 1;*/
-            asm("nop");
-            asm("nop");
-            asm("nop"); break;                
-            }
-            case 1: { } break;
-            case 2: {
-                __delay32(10);
-//              LBuffer[0] = ADS86_testReadWithCMD(READ_HWORD, DATAOUT_CTL_REG);
-//              LBuffer[1] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG+1);
-//              LBuffer[2] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG+2);
-//              LBuffer[3] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG);                
-                LBuffer[2] = ADS86_testReadWithCMD(READ_HWORD, SDI_CTL_REG);
-                LBuffer[4] = ADS86_testReadWithCMD(READ_HWORD, RANGE_SEL_REG);
-                 __delay32(1000);  //1000us
-                L2Buffer[0] = ADS86_WriteLSBcmd(RANGE_SEL_REG, 0x0004);
-                __delay32(100);
-                //L2Buffer[2] = ADS86_WriteHWORD(RANGE_SEL_REG, 0x0004);
-                asm("nop");    
-                __delay32(10);
-                __delay32(1000); 
-		LBuffer[5] = ADS86_testReadWithCMD(0, 0);
-            } break;
-            case 3: {
-                __delay32(10);               
-                asm("nop");  
-                __delay32(60);
-                LBuffer[0] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG);
-                LBuffer[2] = ADS86_testReadWithCMD(READ_HWORD, RANGE_SEL_REG);
-                LBuffer[5] = ADS86_testReadWithCMD(READ_HWORD, DEVICE_ID_REG);
-                asm("nop");                
-                __delay32(1000);
-                L2Buffer[0] = ADS86_WriteLSBcmd(RANGE_SEL_REG, 0x0004);
-            } break;
-            case 4: {
-                asm("nop");            
-            } break;
-            case 5: {
-                ADS86_testReadWithCMD(0b11001000, 0x04);
-                asm("nop");            
-            } break;
-            default: break;
-        }
-        
+	    LBuffer[0] = ADS86_testReadWithCMD(READ_HWORD, DATAOUT_CTL_REG);            
+	    LBuffer[1] = ADS86_testReadWithCMD(READ_HWORD, SDI_CTL_REG);
+            LBuffer[2] = ADS86_testReadWithCMD(READ_HWORD, RANGE_SEL_REG);
+            __delay32(1000);  //1000us
+            L2Buffer[0] = ADS86_WriteLSBcmd(RANGE_SEL_REG, 0x0004);
+            __delay32(100);
+            LBuffer[3] = ADS86_testReadWithCMD(0, 0);                        //Just for test. In here you'll get the sample data of ADC.
+            __delay32(60);
+            LBuffer[4] = ADS86_testReadWithCMD(READ, RANGE_SEL_REG);
+            LBuffer[5] = ADS86_testReadWithCMD(READ_HWORD, DEVICE_ID_REG);
+            asm("nop");                
+            __delay32(1000);
+            L2Buffer[0] = ADS86_WriteLSBcmd(RANGE_SEL_REG, 0x0004);
+            ADS86_testReadWithCMD(0b11001000, 0x04);        
     }    
     return 0;
 }

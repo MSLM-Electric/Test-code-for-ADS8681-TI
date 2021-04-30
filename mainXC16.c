@@ -98,8 +98,7 @@ int main(void)
             LBuffer[5] = ADS86_testReadWithCMD(READ_HWORD, DEVICE_ID_REG);
             asm("nop");                
             __delay32(1000);
-            L2Buffer[0] = ADS86_WriteLSBcmd(RANGE_SEL_REG, 0x0004);
-            ADS86_testReadWithCMD(0b11001000, 0x04);        
+            L2Buffer[0] = ADS86_WriteLSBcmd(RANGE_SEL_REG, 0x0004);          //0100b, set the range of ADC input to: = ±0.625 × VREF
     }    
     return 0;
 }
